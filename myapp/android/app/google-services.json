@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "168661777099",
+    "project_id": "automaticscoring-8ec10",
+    "storage_bucket": "automaticscoring-8ec10.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168661777099:android:1584f40b72c524c560b94e",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQEpHMPjXANzfc-yAOWdttGBaLIvEY1aE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
