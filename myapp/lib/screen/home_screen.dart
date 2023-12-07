@@ -1,36 +1,42 @@
 import 'package:flutter/material.dart';
+import '../screen/mainFunction_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({Key? key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'images/HCMUT_official_logo.png',
-              width: 100.0,
-              height: 100.0,
-            ),
-            Text('Home Screen'),
+            const Text('Home Screen'),
 
             // Buttons for navigation
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
               },
-              child: Text('Register'),
+              child: const Text('Register'),
             ),
 
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/changePassword');
               },
-              child: Text('Change Password'),
+              child: const Text('Change Password'),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/mainFunction');
+              },
+              child: const Text('Scan Image'),
             ),
           ],
         ),
