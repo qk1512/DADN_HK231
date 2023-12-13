@@ -1,34 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-class ChangePasswordScreen extends StatelessWidget {
-  const ChangePasswordScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  ForgotPasswordScreen({Key? key}) : super(key: key);
+
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final TextEditingController _emailController = TextEditingController();
+
+  Future<void> _resetPassword(BuildContext context) async {
+    try {
+      await _auth.sendPasswordResetEmail(
+        email: _emailController.text,
+      );
+
+      // Password reset email sent successfully
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content:
+              Text('Password reset email sent to ${_emailController.text}'),
+        ),
+      );
+
+      // Navigate back to the login screen
+      Navigator.popUntil(context, ModalRoute.withName('/login'));
+    } catch (e) {
+      // Handle errors during password reset
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Failed to send password reset email: $e'),
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Change Password'),
+        title: const Text('Forgot Password'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'Current Password'),
-            ),
-            const SizedBox(height: 16.0),
-            const TextField(
-              obscureText: true,
-              decoration: InputDecoration(labelText: 'New Password'),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Enter your email'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                // Add change password logic here
+                _resetPassword(context);
               },
-              child: const Text('Change Password'),
+              child: const Text('Reset Password'),
             ),
           ],
         ),
