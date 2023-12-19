@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
-  const ForgotPasswordScreen({Key? key});
+  const ForgotPasswordScreen({Key? key}) : super(key: key);
 
   Future<void> _resetPassword(String email, BuildContext context) async {
     try {
@@ -41,7 +41,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               onChanged: (value) {
                 // Implement logic to capture the entered email
               },
-              decoration: InputDecoration(labelText: 'Enter your email'),
+              decoration: const InputDecoration(labelText: 'Enter your email'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(

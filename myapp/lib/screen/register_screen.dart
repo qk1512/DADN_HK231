@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class RegisterScreen extends StatelessWidget {
-  RegisterScreen({Key? key});
+  RegisterScreen({Key? key}) : super(key: key);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _usernameController = TextEditingController();
@@ -15,7 +15,7 @@ class RegisterScreen extends StatelessWidget {
       // Check if passwords match
       if (_passwordController.text != _confirmPasswordController.text) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             content: Text('Passwords do not match'),
           ),
         );
@@ -59,19 +59,19 @@ class RegisterScreen extends StatelessWidget {
           children: [
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              decoration: const InputDecoration(labelText: 'Username'),
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _confirmPasswordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Confirm password'),
+              decoration: const InputDecoration(labelText: 'Confirm password'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(

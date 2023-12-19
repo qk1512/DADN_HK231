@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ForgotPasswordScreen extends StatelessWidget {
-  ForgotPasswordScreen({Key? key}) : super(key: key);
+class ChangePasswordScreen extends StatelessWidget {
+  ChangePasswordScreen({Key? key}) : super(key: key);
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
@@ -46,7 +46,7 @@ class ForgotPasswordScreen extends StatelessWidget {
           children: [
             TextField(
               controller: _emailController,
-              decoration: InputDecoration(labelText: 'Enter your email'),
+              decoration: const InputDecoration(labelText: 'Enter your email'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(

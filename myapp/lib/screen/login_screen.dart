@@ -26,9 +26,9 @@ class LoginScreen extends StatelessWidget {
 
       // Show a snackbar with the error message
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Wrong username or password'),
-          duration: const Duration(seconds: 3),
+        const SnackBar(
+          content: Text('Wrong username or password'),
+          duration: Duration(seconds: 3),
         ),
       );
 
@@ -42,6 +42,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Login'),
       ),
       body: Padding(
@@ -56,13 +57,13 @@ class LoginScreen extends StatelessWidget {
             ),
             TextField(
               controller: _usernameController,
-              decoration: InputDecoration(labelText: 'Username'),
+              decoration: const InputDecoration(labelText: 'Username'),
             ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _passwordController,
               obscureText: true,
-              decoration: InputDecoration(labelText: 'Password'),
+              decoration: const InputDecoration(labelText: 'Password'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
