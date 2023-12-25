@@ -1,7 +1,8 @@
-// main_function_screen.dart
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class MainFunctionScreen extends StatefulWidget {
   const MainFunctionScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class MainFunctionScreen extends StatefulWidget {
 }
 
 class _MainFunctionScreenState extends State<MainFunctionScreen> {
-  List<File> selectedPhotos = [];
+  File? selectedPhoto;
 
   Future<void> _getImageFromCamera() async {
     final picker = ImagePicker();
@@ -19,7 +20,7 @@ class _MainFunctionScreenState extends State<MainFunctionScreen> {
 
     if (pickedFile != null) {
       setState(() {
-        selectedPhotos.add(File(pickedFile.path));
+        selectedPhoto = File(pickedFile.path);
       });
     }
   }
@@ -30,13 +31,45 @@ class _MainFunctionScreenState extends State<MainFunctionScreen> {
 
     if (pickedFile != null) {
       setState(() {
-        selectedPhotos.add(File(pickedFile.path));
+        selectedPhoto = File(pickedFile.path);
       });
     }
   }
 
-  void _savePhotos() {
-    Navigator.pop(context, selectedPhotos);
+  Future<void> _uploadImage(File? image) async {
+    try {
+      if (image == null) {
+        print('No selected image');
+        return;
+      }
+
+      var request = http.MultipartRequest(
+        'POST',
+        Uri.parse('http://192.168.1.128:8000/upload'),
+      );
+
+      request.files.add(await http.MultipartFile.fromPath('image', image.path));
+
+      var response = await request.send();
+
+      if (response.statusCode == 200) {
+        var data = await response.stream.bytesToString();
+        var decodedData = jsonDecode(data);
+        print('Upload successful: ${decodedData['query']}');
+      } else {
+        print('Image upload failed with status ${response.statusCode}');
+        // Handle error as needed
+      }
+    } catch (e) {
+      print('Error uploading image: $e');
+      // Handle error as needed
+    }
+  }
+
+  void _uploadSelectedImage() {
+    _uploadImage(selectedPhoto);
+    // Optionally, you can navigate to the next screen after uploading.
+    Navigator.pushNamed(context, '/prediction');
   }
 
   @override
@@ -45,10 +78,10 @@ class _MainFunctionScreenState extends State<MainFunctionScreen> {
       appBar: AppBar(
         title: const Text('Main Function'),
         actions: [
-          if (selectedPhotos.isNotEmpty)
+          if (selectedPhoto != null)
             IconButton(
-              onPressed: _savePhotos,
-              icon: const Icon(Icons.save),
+              onPressed: _uploadSelectedImage,
+              icon: const Icon(Icons.filter_vintage_outlined),
             ),
         ],
       ),

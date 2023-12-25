@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:myapp/screen/login_screen.dart';
 import 'package:myapp/screen/forgotPassword_screen.dart';
+import 'package:myapp/screen/prediction.dart';
 import 'package:myapp/screen/register_screen.dart';
 import 'package:myapp/screen/home_screen.dart';
 import 'package:myapp/screen/changePassword_screen.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         '/forgotPassword': (context) => ForgotPasswordScreen(),
         '/changePassword': (context) => ChangePasswordScreen(),
         '/mainFunction': (context) => const MainFunctionScreen(),
+        '/prediction' :(context) => Predictor()
       },
     );
   }
