@@ -6,7 +6,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-model_path = "./assets/model.pt"
+model_path = "./assets/best.pt"
 model = YOLO(model_path)
 
 UPLOAD_FOLDER = './uploads'
